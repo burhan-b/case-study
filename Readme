@@ -1,8 +1,10 @@
+# Intruduction
+Create infrastructure in Azure
+
 # Azure CLI
 #Run Azure CLI
-docker run -it --rm -v ${PWD}:/work -w /work --entrypoint /bin/sh mcr.microsoft.com/azure-cli:2.6.0
+docker run -it --rm mcr.microsoft.com/azure-cli:2.6.0
 
-cd ./kubernetes/cloud/azure
 
 # Login to Azure
 #login and follow prompts
@@ -16,7 +18,7 @@ az account set --subscription $SUBSCRIPTION
 
 # Create our Resource Group
 RESOURCEGROUP=aks-getting-started
-az group create -n $RESOURCEGROUP -l australiaeast
+az group create -n $RESOURCEGROUP -l westeurpe
 
 # Create Service Principal
 Kubernetes needs a service account to manage our Kubernetes cluster
@@ -51,7 +53,7 @@ cp ~/.ssh/id_rsa* .
 
 az aks create -n aks-getting-started \
 --resource-group $RESOURCEGROUP \
---location australiaeast \
+--location westeurpe \
 --kubernetes-version 1.16.10 \
 --load-balancer-sku standard \
 --nodepool-name default \
