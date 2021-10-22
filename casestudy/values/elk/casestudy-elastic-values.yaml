@@ -22,7 +22,7 @@ esConfig:
 
 
 
-#image: "registry.app.corpintra.net/mbfs.powertrain/elasticsearch"
+#image: ""
 imageTag: "7.10.2"
 imagePullPolicy: "IfNotPresent"
 

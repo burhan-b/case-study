@@ -47,6 +47,41 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        - name: {{ .Values.logging.fluentBit.name }}
+          image: {{ .Values.logging.fluentBit.image }}:{{ .Values.logging.fluentBit.imageVersion }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: {{ .Values.logging.fluentBit.resources.limits.memory | quote }}
+              cpu: {{ .Values.logging.fluentBit.resources.limits.cpu | quote }}
+            requests:
+              memory: {{ .Values.logging.fluentBit.resources.requests.memory | quote }}
+              cpu: {{ .Values.logging.fluentBit.resources.requests.cpu | quote }}
+          env:
+          - name: LOGSTASH_PREFIX
+            value: "{{ .Values.logging.fluentBit.logStashPrefix }}"
+          - name: ELASTICSEARCH_HOST
+            value: "{{ .Values.logging.fluentBit.elasticSearchHost }}"
+          - name: ELASTICSEARCH_PORT
+            value: "{{ .Values.logging.fluentBit.elasticSearchPort }}"
+          - name: ENV
+            value: "{{ .Values.logging.fluentBit.env }}"
+          ports:
+            - containerPort: {{ .Values.logging.fluentBit.ports.containerPort }}
+          volumeMounts:
+            - name: applog
+              mountPath: /var/log
+            - name: fluent-bit-config
+              mountPath: /fluent-bit/etc/
+        volumes:
+          - name: {{ .Values.configMap.name }}
+            configMap:
+              name: {{ .Values.configMap.name }}
+          - name: applog
+            emptyDir: {}
+          - name: fluent-bit-config
+            configMap:
+              name: fluent-bit-config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

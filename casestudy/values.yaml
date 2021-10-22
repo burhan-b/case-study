@@ -80,3 +80,20 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+logging:
+  fluentBit:
+    name: fluent-bit
+    image: registry.app.corpintra.net/mbfs.powertrain/fluentbit
+    #image: mbfsacrdev.azurecr.io/fluentbit
+    imageVersion: 0.14.2
+    resources:
+      limits:
+        memory: "50Mi"
+        cpu: "200m"
+      requests:
+        memory: "50Mi"
+        cpu: "100m"
+    logStashPrefix: "casestudy"
+    ports:
+      containerPort: 2020
