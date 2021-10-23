@@ -28,7 +28,5 @@ az role assignment create --assignee $SERVICE_PRINCIPAL \
 --scope "/subscriptions/$SUBSCRIPTION/resourceGroups/$RESOURCEGROUP" \
 --role Contributor
 
-For extra reference you can also take a look at the Microsoft Docs: here
-
 # Create our cluster
 terraform apply -var client_id="SERVICE_PRINCIPAL" -var client_secret="SERVICE_PRINCIPAL_SECRET"
