@@ -29,8 +29,8 @@ module "network" {
 module "aks" {
   source                           = "Azure/aks/azurerm"
   resource_group_name              = azurerm_resource_group.example.name
-  client_id                        = "MY-client_id"
-  client_secret                    = "MY-client_secret"
+  client_id                        = "var.client_id"
+  client_secret                    = "var.client_secret"
   kubernetes_version               = "1.22.2"
   orchestrator_version             = "1.22.2"
   prefix                           = "migros"
