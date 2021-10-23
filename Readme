@@ -1,11 +1,6 @@
 # Intruduction
 Create infrastructure in Azure
 
-# Azure CLI
-#Run Azure CLI
-docker run -it --rm mcr.microsoft.com/azure-cli:2.6.0
-
-
 # Login to Azure
 #login and follow prompts
 az login 
@@ -16,14 +11,9 @@ az account list -o table
 SUBSCRIPTION=<id>
 az account set --subscription $SUBSCRIPTION
 
-# Create our Resource Group
-RESOURCEGROUP=aks-getting-started
-az group create -n $RESOURCEGROUP -l westeurpe
-
 # Create Service Principal
 Kubernetes needs a service account to manage our Kubernetes cluster
 Lets create one!
-
 
 SERVICE_PRINCIPAL_JSON=$(az ad sp create-for-rbac --skip-assignment --name aks-getting-started-sp -o json)
 
@@ -41,27 +31,4 @@ az role assignment create --assignee $SERVICE_PRINCIPAL \
 For extra reference you can also take a look at the Microsoft Docs: here
 
 # Create our cluster
-#full list of options
-
-az aks create --help
-az aks get-versions --location australiaeast -o table
-
-#generate SSH key
-
-ssh-keygen -t rsa -b 4096 -N "VeryStrongSecret123!" -C "your_email@example.com" -q -f  ~/.ssh/id_rsa
-cp ~/.ssh/id_rsa* .
-
-az aks create -n aks-getting-started \
---resource-group $RESOURCEGROUP \
---location westeurpe \
---kubernetes-version 1.16.10 \
---load-balancer-sku standard \
---nodepool-name default \
---node-count 1 \
---node-vm-size Standard_E4s_v3  \
---node-osdisk-size 250 \
---ssh-key-value ./id_rsa.pub \
---network-plugin kubenet \
---service-principal $SERVICE_PRINCIPAL \
---client-secret "$SERVICE_PRINCIPAL_SECRET" \
---output none
+terraform apply -var client_id="SERVICE_PRINCIPAL" -var client_secret="SERVICE_PRINCIPAL_SECRET"
