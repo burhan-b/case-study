@@ -1,0 +1,78 @@
+name: casestudy-service-template
+containerName: casestudy-app
+
+labels:
+  app: casestudy
+
+replicaCount: 1
+
+imagePullSecrets: []
+
+serviceAccount:
+  create: true 
+  annotations: {}
+  name: "cs-sa"
+
+image:
+  repository: nginx
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.14.2"
+
+configMap:
+  name: logback-config-server
+
+volumeMs:
+  container:
+    mountPath: /home/javarun/config
+
+service:
+  type: ClusterIP
+  port: 80
+  protocol: TCP
+  name: http
+  targetPort: 9001
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /actuator/health/liveness
+    port: 8888
+  initialDelaySeconds: 120
+  timeoutSeconds: 20
+  periodSeconds: 30
+  failureThreshold: 1
+
+readinessProbe:
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8888
+  initialDelaySeconds: 10
+  timeoutSeconds: 20
+  periodSeconds: 30
+  failureThreshold: 1
+
+logging:
+  fluentBit:
+    name: fluent-bit
+    image: fluent/flent-bit
+    imageVersion: latest
+    resources:
+      limits:
+        memory: "50Mi"
+        cpu: "200m"
+      requests:
+        memory: "50Mi"
+        cpu: "100m"
+    logStashPrefix: "casestudy"
+    elasticSearchHost: "elasticsearch-master-headless"
+    elasticSearchPort: "9200"
+    ports:
+      containerPort: 2020

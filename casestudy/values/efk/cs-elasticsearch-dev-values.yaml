@@ -21,7 +21,6 @@ esConfig:
    http.cors.allow-origin: "*"
 
 
-
 #image: ""
 imageTag: "7.10.2"
 imagePullPolicy: "IfNotPresent"
@@ -37,26 +36,16 @@ resources:
     cpu: 200m
     memory: 1Gi
 
-
-
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
-  #storageClassName: nfs-client
+  #storageClassName: "nfs-client"
   resources:
     requests:
       storage: 30Gi
 
-
-
 protocol: http
 httpPort: 9200
 transportPort: 9300
-
-
-
-
-# imagePullSecrets: 
-# - name: regcred-harbor
 
 sysctlInitContainer:
   enabled: true
