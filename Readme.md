@@ -32,5 +32,5 @@ az role assignment create --assignee $SERVICE_PRINCIPAL \
 terraform apply -var client_id="SERVICE_PRINCIPAL" -var client_secret="SERVICE_PRINCIPAL_SECRET"
 
 # Kubernetes side
-After push the image to Azure, It will use to up the kubernetes deployment.
+After push the image to Azure, It will be used to up the kubernetes deployment.
 Run the casestudy-deployment.sh in the deployment-scripts directory
