@@ -7,4 +7,8 @@ helm upgrade --install elasticsearch elastic/elasticsearch -f ./values/efk/cs-el
 
 helm upgrade --install kibana elastic/kibana -f ./values/efk/cs-kibana-dev-values.yaml -n casestudy --create-namespace
 
+kubectl apply -f ./charts/configmaps/fluentbit-configmap.yaml
+
+helm upgrade --install nginx ./charts -n casestudy --create-namespace
+
 # add "192.168.99.104 dev.casestudy.com" to etc/hosts file
