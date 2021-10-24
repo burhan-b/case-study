@@ -33,3 +33,4 @@ terraform apply -var client_id="SERVICE_PRINCIPAL" -var client_secret="SERVICE_P
 
 # Kubernetes tarafı
 Azure ra nginx imajını yükledikten sonra oradan çekip pod un ayağa kaldırılması sağlanıyor
+Ayağa kaldırmak için deployment-scripts dizini içindeki casestudy-deployment.sh scriptinin çalıştırılması gerekiyor
