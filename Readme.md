@@ -33,4 +33,4 @@ terraform apply -var client_id="SERVICE_PRINCIPAL" -var client_secret="SERVICE_P
 
 # Kubernetes side
 After push the image to Azure, It will be used to up the kubernetes deployment.
-Run the casestudy-deployment.sh in the deployment-scripts directory
+Run the casestudy-deployment.sh script in the deployment-scripts directory
