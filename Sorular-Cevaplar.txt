@@ -1,0 +1,47 @@
+Q1 - What are the success factors for Continuous
+Integration?
+
+A1 - 
+
+- Bir kod repo sunda tüm kodları bir arada tutmak
+- Build süreçlerini otomatikleştirmek
+- Otomatik testler yazmak
+- Herkesin hergün code da yeni commit ler yapması ile daha hızlı değişiklerin yapılması
+- Markete çıkmayı kolaylaştırmak ve hızlandırmakHerkes gün sonundan son kodun sonuçlarını görebilir
+- Versiyon kontrolü için kullabilecek tool lar:
+Github, Bitbucket, GitLab
+- Versiyon kontrolü için kullabilecek tool lar:
+Chef, Puppet, Ansible
+- Deployment için:
+Jenkins
+- Test süreçleri için:
+Selenium
+
+Q2 - Why are configuration management processes and
+tools important?
+
+A2 -
+
+- Sistemlerdeki değişiklikler sonrası sorun ve güvenlik ihlali risklerinin azaltılması.
+- İnsan hatalarını ortadan kaldırarak, maliyet israfının önüne geçilmesi
+- Performası olumsuz etkileyebilecek kısımları hızlı tespit edip müşteriye daha iyileştirilmiş bir deneyim sunulması
+- Sistemleri sürekli monitor ederek olası kesintiler için önceden proaktif önlem almak
+
+Q3 - How would you explain the concept of
+“infrastructure as code” (IaC)?
+
+A3 -
+
+Altyapının manuel süreçler yerine kod aracılığıyla yönetilmesi ve sağlanmasıdır.
+
+IaC ile, altyapı özelliklerini içeren yapılandırma dosyaları oluşturulur, bu da yapılandırmaları düzenlemeyi ve dağıtmayı kolaylaştırır. Ayrıca her seferinde aynı ortamı build etmeyi sağlar.
+
+IaC, yapılandırma spesifikasyonlarınızı kodlayarak ve belgeleyerek yapılandırma yönetimine yardımcı olur ve belgelenmemiş, geçici yapılandırma değişikliklerinden kaçınmanıza yardımcı olur.
+
+Sürüm kontrolü, IaC'nin önemli bir parçasıdır ve yapılandırma dosyaları, diğer yazılım kaynak kodu dosyaları gibi kaynak kontrolü altında olmalısı gerekir.
+
+Altyapıyı kod olarak dağıtmak, altyapının daha sonra otomasyon yoluyla farklı şekillerde birleştirilebilecek modüler bileşenlere bölünebileceği anlamına gelir.
+
+IaC ile altyapı sağlamayı otomatikleştirmek, geliştiricilerin bir uygulama geliştirdikleri veya dağıttıkları her seferde sunucuları, işletim sistemlerini, depolamayı ve diğer altyapı bileşenlerini manuel olarak sağlamalarına ve yönetmelerine gerek olmadığı anlamına gelir.
+
+Altyapıyı kodlamak, temel hazırlık için izlemenebilecek bir şablon sağlar ve bu yine de manuel olarak gerçekleştirilebilse de Ansible gibi bir otomasyon aracı süreci otomatik yapabilir
