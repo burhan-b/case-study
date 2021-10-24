@@ -1,6 +1,6 @@
 cd ../ || exit
 
-#gerekli repo ekleniyor
+#Gerekli repo ekleniyor
 helm repo add elastic https://helm.elastic.co
 helm repo update
 
