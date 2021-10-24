@@ -1,5 +1,5 @@
 # Intruduction
-Create infrastructure in Azure
+Create infrastructure in Azure with main.tf
 
 # Login to Azure
 #login and follow prompts
