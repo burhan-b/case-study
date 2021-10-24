@@ -1,8 +1,10 @@
 ---
+# Elastic host ve port ayarı
 elasticsearchHosts: "http://elasticsearch-master-headless:9200"
 
 replicas: 1
 
+# image detayı
 #image: ""
 imageTag: "7.10.2"
 imagePullPolicy: "IfNotPresent"
@@ -21,14 +23,13 @@ serverHost: "0.0.0.0"
 
 healthCheckPath: "/kibana/app/kibana"
 
-# Allows you to add any config files in /usr/share/kibana/config/
-# such as kibana.yml
+# Ingress e ile path base bağlanabilmek için /kibana bu basepath ayarının yapılması gerekiyor
 kibanaConfig: 
    kibana.yml: |
       server.basePath: /kibana
       server.rewriteBasePath: true
 
-
+#ingress ayarları
 ingress:
   enabled: true
   

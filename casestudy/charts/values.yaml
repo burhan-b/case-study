@@ -1,13 +1,32 @@
 name: casestudy
 containerName: casestudy-app
 
+# HighAvailablity için replicaCount sayısı arttırılabilir
 replicaCount: 1
 
+#Azure a yüklediğimiz nginx image ını kullanıyoruz
+image:
+  registry: burhanreg.azurecr.io
+  name: nginx
+  tag: "1.0"
+  pullSecret: regcred
+
+#nginx resource larını ayarlama
+nginx:
+  resources:
+    limits:
+      memory: 100Mi
+      cpu: 100m
+    requests:
+      memory: 100Mi
+      cpu: 100m
+
+#fluentbit ayarlamalarını yapma
 logging:
   fluentBit:
     name: fluent-bit
     image: fluent/fluent-bit
-    imageVersion: latest
+    imageVersion: 0.14.2
     resources:
       limits:
         memory: "50Mi"

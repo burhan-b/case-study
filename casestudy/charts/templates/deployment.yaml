@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: casestudy
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: {{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: {{ .Values.nginx.resources.limits.memory }}
+              cpu: {{ .Values.nginx.resources.limits.cpu }}
+            requests:
+              memory: {{ .Values.nginx.resources.limits.memory }}
+              cpu: {{ .Values.nginx.resources.limits.cpu }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: applog
+              mountPath: /var/log/nginx/
+        - name: fluent-bit
+          image: {{ .Values.logging.fluentBit.image }}:{{ .Values.logging.fluentBit.imageVersion }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: {{ .Values.logging.fluentBit.resources.limits.memory }}
+              cpu: {{ .Values.logging.fluentBit.resources.limits.cpu }}
+            requests:
+              memory: {{ .Values.logging.fluentBit.resources.limits.memory }}
+              cpu: {{ .Values.logging.fluentBit.resources.limits.cpu }}
+          ports:
+            - containerPort: {{ .Values.logging.fluentBit.ports.containerPort }}
+          env:
+            - name: LOGSTASH_PREFIX
+              value: {{ .Values.logging.fluentBit.logStashPrefix | quote }}
+            - name: ELASTICSEARCH_HOST
+              value: {{ .Values.logging.fluentBit.elasticSearchHost | quote }}
+            - name: ELASTICSEARCH_PORT
+              value: {{ .Values.logging.fluentBit.elasticSearchPort | quote }}
+            - name: ENV
+              value: "casestudy"
+          volumeMounts:
+            - name: applog
+              mountPath: /var/log
+            - name: fluentbit-config
+              mountPath: /fluent-bit/etc/
+      terminationGracePeriodSeconds: 5
+      volumes:
+        - name: applog
+          emptyDir: {}
+        - name: varlibdockercontainers
+          hostPath:
+            path: /var/lib/docker/containers
+        - name: fluentbit-config
+          configMap:
+            name: fluentbit-config
+      imagePullSecrets:
+        - name: {{ .Values.image.pullSecret }}

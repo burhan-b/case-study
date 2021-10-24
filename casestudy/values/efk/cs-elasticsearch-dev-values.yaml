@@ -8,13 +8,11 @@ roles:
   data: "true"
   remote_cluster_client: "true"
 
-
+# HighAvailablity için replicas sayısı arttırılabilir
 replicas: 1
 minimumMasterNodes: 1
 
 
-# Allows you to add any config files in /usr/share/elasticsearch/config/
-# such as elasticsearch.yml and log4j2.properties
 esConfig: 
  elasticsearch.yml: |
    http.cors.enabled: true
@@ -38,7 +36,6 @@ resources:
 
 volumeClaimTemplate:
   accessModes: [ "ReadWriteOnce" ]
-  #storageClassName: "nfs-client"
   resources:
     requests:
       storage: 30Gi
