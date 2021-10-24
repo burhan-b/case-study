@@ -31,6 +31,6 @@ az role assignment create --assignee $SERVICE_PRINCIPAL \
 # Create our cluster
 terraform apply -var client_id="SERVICE_PRINCIPAL" -var client_secret="SERVICE_PRINCIPAL_SECRET"
 
-# Kubernetes tarafı
-Azure ra nginx imajını yükledikten sonra oradan çekip pod un ayağa kaldırılması sağlanıyor
-Ayağa kaldırmak için deployment-scripts dizini içindeki casestudy-deployment.sh scriptinin çalıştırılması gerekiyor
+# Kubernetes side
+After push the image to Azure, It will use to up the kubernetes deployment
+Run the casestudy-deployment.sh in the deployment-scripts directory
