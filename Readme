@@ -30,3 +30,6 @@ az role assignment create --assignee $SERVICE_PRINCIPAL \
 
 # Create our cluster
 terraform apply -var client_id="SERVICE_PRINCIPAL" -var client_secret="SERVICE_PRINCIPAL_SECRET"
+
+# Kubernetes tarafı
+Azure ra nginx imajını yükledikten sonra oradan çekip pod un ayağa kaldırılması sağlanıyor
